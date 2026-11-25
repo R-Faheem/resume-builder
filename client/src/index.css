@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body { @apply bg-paper font-sans text-slate-800; }
+
+button:not(:disabled) {
+  cursor: pointer;
+  transition: filter 150ms ease, transform 150ms ease, box-shadow 150ms ease;
+}
+
+button:not(:disabled):hover {
+  filter: brightness(0.94);
+  transform: translateY(-1px);
+}
+
+button:not(:disabled):active {
+  transform: translateY(0);
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
+button:focus-visible {
+  outline: 2px solid #1d4e5f;
+  outline-offset: 2px;
+}
+
+/* Print: only the resume sheet, full page, no chrome */
+@media print {
+  @page { size: A4; margin: 12mm; }
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  .print-area { display: block !important; width: 100% !important; }
+  .resume-sheet { box-shadow: none !important; padding: 0 !important; border: 0 !important; position: static !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button:not(:disabled) { transition: none; }
+}
