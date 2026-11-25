@@ -49,11 +49,11 @@ function extractKeywords(text) {
   return [...new Set((text.toLowerCase().match(/[a-z0-9][a-z0-9+#.-]*/g) || [])
     .filter((term) => !keywordStopWords.has(term)))];
 }
-
+const API_BASE = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
 async function api(url, body, method = 'POST') {
   let res;
   try {
-    res = await fetch(url, {
+    res = await fetch(`${API_BASE}${url}`, {
       method,
       headers: { 'Content-Type': 'application/json' },
       body: body ? JSON.stringify(body) : undefined,
